@@ -1,0 +1,147 @@
+:root{
+    --calc : calc(100%*4);
+}
+.root{
+    margin: 0;
+    padding: 0 70px 0;
+    font-family: 'Roboto', sans-serif;
+    z-index: 1000;
+}
+
+h2{
+    font-size: 22px;
+    font-style: italic;
+    color: whitesmoke;
+    padding: 0;
+}
+
+.post {
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background: url(../storage/loading.gif) center / 50px no-repeat;
+}
+.post4{
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background: url(../storage/loading.gif) center / 50px no-repeat;
+}
+.zooming{
+   width: 100%;
+   height:auto;
+   max-height:100%;
+}
+
+ .post:hover {
+    transform: scale( 1.8   );
+    transform-origin: top left;
+    margin-top: -150px;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+    cursor: pointer;
+    top:0;
+    left: 0;
+    overflow: hidden;
+    z-index: 9999;
+} 
+
+.post4:hover {
+    transform: scale( 1.8   );
+    transform-origin: top right;
+    margin-top: -150px;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+    cursor: pointer;
+    top:0;
+    left: 0;
+    overflow: hidden;
+    z-index: 9999;
+} 
+
+.containerFoto{
+    display: grid;
+
+    grid-template-columns:  1fr 1fr 1fr 1fr;
+    grid-template-rows: 320px 30px;
+    /* min-height: calc(100vh - 100px); */
+
+    grid-gap: 10px;
+
+    justify-items: top;
+    align-items: center;
+}
+
+.post-text{
+    box-align: center;
+}
+
+.task{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px 30px;
+    z-index: 1100;
+}
+
+.task input{
+    position: absolute;
+    visibility: hidden;
+}
+
+.task i{
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgb(46, 25, 136);
+    text-align: center;
+    line-height: 48px;
+    font-size: 20px;
+    margin-right: 14px;
+    color: transparent;
+    z-index: 2100;
+}
+
+.atsak{
+    font-size: 18px;
+    color: rgb(255, 193, 7);
+    width: 90%;
+    z-index: 2101;
+}
+
+.task input:checked ~ i{
+    color: whitesmoke;
+}
+
+.task input:checked ~ .atsak{
+    color: whitesmoke;
+}
+
+.goTop{
+    position: fixed;
+    z-index: 999;
+    bottom: 40px;
+    right: 40px;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(30, 38, 160, 0.3);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #fff;
+    outline: none;
+    display: none;
+  }
+
+  .goTop:hover{
+    background-color: rgba(30, 38, 160, 1);
+  }
+
+  .rodyti{
+      display: block;
+  }
