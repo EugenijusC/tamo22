@@ -45,20 +45,20 @@
             </ul>
         </div>
     @endif
-<div class="col-4">
+    <div class="container text-center">
     <form method="get" action="{{ route('rezults') }}">
         @csrf
-        <div class="row">
-        <div class="col-sm-9">
+        <div class="row row-cols-4">
+        <div class="col-md-3">
             <input type="date" name="data_nuo" id="data_nuo" placeholder="Nuo" class="form-control" value="{{ $nuo }}" />
         </div>
-        <div class="col-sm-9">
+        <div class="col-md-3">
             <input type="date" name="data_iki" id="data_iki" placeholder="Iki" class="form-control" value="{{ $iki }}" />
         </div>
         
 
         @if (count($usrs_centras))
-        <div class="col-sm-9">
+        <div class="col-md-3">
             <select name="kontr" class="form-control" style="text-align-last: center;">
             <option value="0">--Visi kontrolieriai--</option>
                 @foreach($usrs_centras as $js) 
@@ -69,19 +69,19 @@
         </div>
         @endif
 
-        <div class="col-sm-9">
+        <div class="col-md-3">
             <select class="form-control" name="centras" style="text-align-last: center;">
-                          <option value="all">--Visi centrai--</option>
-                          <option value="0">Tuvlita</option>
-                          <option value="1">Skirlita</option>
-                          <option value="2">Kauno TAC</option>
-                          <option value="3">Marijampolės TAC</option>
-                          <option value="4">Klaipėdos TAC</option>
-                          <option value="5">Tauragės TAC</option>
-                          <option value="6">Šiaulių TAC</option>
-                          <option value="7">Telšių TAC</option>
-                          <option value="8">Panevėžio TAC</option>
-                          <option value="8">Utenos TAC</option>
+                          <option value="99" @if ( $centras === '99') selected="selected" @endif>--Visi centrai--</option>
+                          <option value="00" @if ( $centras === '00') selected="selected" @endif>Tuvlita</option>
+                          <option value="01" @if ( $centras == '01') selected="selected" @endif>Skirlita</option>
+                          <option value="02" @if ( $centras == '02') selected="selected" @endif>Kauno TAC</option>
+                          <option value="03" @if ( $centras == '03') selected="selected" @endif>Marijampolės TAC</option>
+                          <option value="04" @if ( $centras == '04') selected="selected" @endif>Klaipėdos TAC</option>
+                          <option value="05" @if ( $centras == '05') selected="selected" @endif>Tauragės TAC</option>
+                          <option value="06" @if ( $centras == '06') selected="selected" @endif>Šiaulių TAC</option>
+                          <option value="07" @if ( $centras == '07') selected="selected" @endif>Telšių TAC</option>
+                          <option value="08" @if ( $centras == '08') selected="selected" @endif>Panevėžio TAC</option>
+                          <option value="09" @if ( $centras == '09') selected="selected" @endif>Utenos TAC</option>
             </select>
         </div>
         </div>
@@ -96,6 +96,7 @@
     <br>  <br>
     <h1>Rezultatai</h1>
 
+<!-- <span class="badge bg-danger">ffffaaw er er <i class="fa fa-thumbs-up"></i></span> -->
 </div>
     <div class="container-xxl pirmas px-0">
         <div class="row row-cols-6 fs-4 border-bottom">
@@ -104,6 +105,7 @@
             <div class="col  text-center">Pažangumas</div>
             <div class="col  text-center">Teisingi </div>
             <div class="col  text-center">Klaidingi</div>
+            <div class="col  text-center">Centras</div>
             <div class="col  text-center">&nbsp</div>
         </div>
     </div>
@@ -132,6 +134,7 @@
                
                 <div class="col  text-center">{{$el->testas_teisingi}} </div>
                 <div class="col  text-center">{{$el->testas_klaidingi}}</div>
+                <div class="col  text-center">{{$el->users['centras']}}</div>
                 <div class="col  text-center"><a href=" {{ route('rezults_smulkiai',$el->id) }}" class="btn btn-primary">Smulkiau</a></div>
             </div>
         </div>
@@ -139,8 +142,8 @@
 
     @endforeach
 
-        <div class="bg-white px-4 py-3 align-items-center justify-content-between">
-           {{ $rez->appends(['data_nuo' => request()->data_nuo,'data_iki' => request()->data_iki, 'kontr' => request()->kontr  ])->links() }}
+        <div class="bg-white px-4 py-3 nav-link center">
+           {{ $rez->appends(['data_nuo' => request()->data_nuo,'data_iki' => request()->data_iki, 'kontr' => request()->kontr,'centras' => request()->centras  ])->links() }}
         </div>
     
      

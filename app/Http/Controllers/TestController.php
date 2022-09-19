@@ -99,7 +99,7 @@ class TestController extends Controller
 
         return redirect()->route('rezults');
     }
-
+//-------------------------------------------------------------------------------------------------------------------
     public function rezults_sm(Request $request,$id){
 
         //dd($request);
@@ -128,47 +128,44 @@ class TestController extends Controller
     public function rezults(Request $request) {
 
         $ir_sk = '\Config'::get('constants.puslapiavimas.rez_row_per_page');
-        $propertiesRez= Rezultatai::query();
-        $adminas=(Auth::user()->is_admin);
+       // $propertiesRez= Rezultatai::query();
+        $adminas=(empty(Auth::user()->is_admin) ? 0: 1);
         $nuo=(empty($request->data_nuo)) ? date('Y-m-d', strtotime(now().'-31 day')) : $request->data_nuo;
         $iki=(empty($request->data_iki)) ? date('Y-m-d', strtotime(now().'+1 day')) : date('Y-m-d', strtotime($request->data_iki.'+1 day')) ;
         $user = Auth::id();
-        $c = empty(Auth::user()->centras) ? '99' : Auth::user()->centras;
-        $centras=empty($request->centras) ? '' : $request->centras;
+        $c = empty(Auth::user()->centras) ? '-1' : Auth::user()->centras;
+        $centras=(empty($request->centras) or $request->centras =='99') ? '-1' : $request->centras;
 
         $user_list = Rezultatai::distinct('users_id')->orderBy('users_id')->get();
-        $k=1;      
-        $k = $request->kontr;
+    //    $k=0;      
+        $k = empty($request->kontr) ? 0: $request->kontr ;
 
        
-        // $propertiesRez->whereBetween('testas_pradzia',[$nuo,$iki])
-        //     ->orderBy('testas_pradzia','desc')
-        //     ->paginate(50);
-//dd($propertiesRez);
 
-         if($adminas && $request->get('kontr') != 0) {
-            $Rezultatai = Rezultatai::whereBetween('testas_pradzia',[$nuo,$iki])->orderBy('testas_pradzia','desc')
-            ->where('users_id',$k)
-            ->paginate(20);
-            }
-            else {
-                $Rezultatai = Rezultatai::whereBetween('testas_pradzia',[$nuo,$iki])->orderBy('testas_pradzia','desc')
-              //  ->where(USER::get('centras'), $centras)
-                ->paginate(20);
-            };
-           //  dd($Rezultatai);
 
-        //$rez=$propertiesRez->get();
-//return compact('rez');
-   //     dd( $rez);
+        //  if($adminas && $request->get('kontr') != 0) {
+        //     $Rezultatai = Rezultatai::whereBetween('testas_pradzia',[$nuo,$iki])->orderBy('testas_pradzia','desc')
+        //     ->where('users_id',$k)
+        //     ->with('users')
+        //     ->paginate(12);
+        //     }
+        //     else {
+        //         $Rezultatai = Rezultatai::whereBetween('testas_pradzia',[$nuo,$iki])->orderBy('testas_pradzia','desc')
+        //       //  ->where(USER::get('centras'), $centras)
+        //       ->with('users')
+        //       ->paginate(12);
+        //     };
+            $Rezultatai=Rezultatai::Rez($adminas,$nuo,$iki,12,$k,$centras);
 
-         if (!$adminas) {
-         $Rezultatai = Rezultatai::whereBetween('testas_pradzia',[$nuo,$iki])
-             ->orderBy('testas_pradzia', 'desc')
-             ->where('users_id', $user)
-             ->paginate($ir_sk) ;
-         }
-        if($c ==99) {
+           // dd($Rezultatai);
+
+        //  if (!$adminas) {
+        //  $Rezultatai = Rezultatai::whereBetween('testas_pradzia',[$nuo,$iki])
+        //      ->orderBy('testas_pradzia', 'desc')
+        //      ->where('users_id', $user)
+        //      ->paginate($ir_sk) ;
+        //  }
+        if($c == -1) {
             $useriai = USER::orderBy('name')->get();
         } else {
             $useriai = USER::where('centras','=',"{$c}")->orderBy('name')->get();
@@ -179,10 +176,10 @@ class TestController extends Controller
 
     
 
-        return view('user.rezultatai', ['rez' => $Rezultatai,   'nuo' =>$nuo,  'iki' => $iki, 'usrs_centras' => $useriai,'kontr' => $k ] );
+        return view('user.rezultatai', ['rez' => $Rezultatai,   'nuo' =>$nuo,  'iki' => $iki, 'usrs_centras' => $useriai,'kontr' => $k,'centras' =>$centras ] );
     }
 
-
+//-------------------------------------------------------------------------------------------------------------------
 
     public function endtest(Request $request) {
 

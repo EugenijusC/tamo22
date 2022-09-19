@@ -18,7 +18,7 @@ class MainController extends Controller
         // $contact->message = 'Hello contact@example.com';
         // $contact -> save();
 
-        return view('admin.index');
+        return view('user.start');
     }
 
 }

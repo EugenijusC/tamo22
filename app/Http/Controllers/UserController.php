@@ -7,12 +7,12 @@ use App\Klausimai;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Config;
 
 use App\Contact;
 
 
-
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -38,10 +38,11 @@ class UserController extends Controller
 
 
     public function contacts() {
-        $reviews = new Contact();
+        //$reviews = new Contact();
       //  $posts = Post::orderBy('id'),
         $puslapiavimas=\Config::get('constants.puslapiavimas.contacts_row_per_page');
-        return view('user.contacts', ['contacts' => $reviews->orderBy('created_at', 'desc')->paginate($puslapiavimas)]);
+        $contacts =Contact::orderBy('created_at', 'desc')->paginate($puslapiavimas);
+        return view('user.contacts', compact('contacts'));
     }
 
 

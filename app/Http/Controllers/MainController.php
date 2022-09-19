@@ -39,7 +39,7 @@ class MainController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        session()->flash('success', 'Регистрация пройдена');
+        session()->flash('success', 'Registracija baigta');
         Auth::login($user);
         return redirect()->home();
     }

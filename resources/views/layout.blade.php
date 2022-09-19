@@ -31,11 +31,11 @@
     <img src="../assets/logo.svg" style="color: #fafafa; width: 80px; height: 80px;"/>
     <h5 class="my-0 mr-md-auto fw-bold">TAMO</h5>
 
-    <nav class="nav justify-content-end" style="width: 80vw;">
-        <a class="p-2 text-white" href="/start">Pagrindinis</a>
-        <a class="p-2 text-white" href="/test">Testas</a>
-        <a class="p-2 text-white" href="/rezults">Rezultatai</a>
-        <a class="p-2 text-white" href="/contacts">Kontaktai</a>
+    <nav class="nav justify-content-end nav-pills" style="width: 80vw;">
+        <a class="p-2 text-white nav-link {{ $mainLink }}" href="/start">Pagrindinis</a>
+        <a class="p-2 text-white nav-link" href="/test">Testas</a>
+        <a class="p-2 text-white nav-link {{ $rezLink }}" href="/rezults">Rezultatai</a>
+        <a class="p-2 text-white nav-link {{ $contactLink }}" href="/contacts">Kontaktai</a>
         <img src="../storage/avatar.png" style="width: 32px;height: 32px;"/>
         <a class="p-2 text-white" href="#">{{ Auth::user() ? Auth::user()->name : "Noname" }}</a>
 
