@@ -17,12 +17,10 @@ use Illuminate\Support\Facades\Config;
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::view('/', 'welcome')->name('home');
 
-
-
+Route::get('/users/export/', 'UserController@export')->name('export');
+Route::get('/users/login_tuv/', 'UserController@loginT')->name('loginT');
 
 
 
@@ -65,9 +63,7 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/contacts', 'UserController@contacts')->name('contacts');
 
-    Route::get('/start', function () {
-        return view('user.start');
-    })->name('start');
+    Route::view('/start', 'user.start')->name('start');
 });
 
 Route::get('/logout', 'UserController@logout')->name('logout')->middleware('auth');

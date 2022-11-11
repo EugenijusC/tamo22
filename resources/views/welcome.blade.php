@@ -182,7 +182,7 @@
                     TAMO
                 </div>
                 <div class="links">
-                    © Asociacija Transeksta
+                    © Eugenijus Černiauskas
                 </div>
 
 
@@ -190,7 +190,7 @@
         </div>
        
 <script>
-        var  timer = 15;
+        var  timer = 5;
 
 
         var myVar = setInterval(function() {

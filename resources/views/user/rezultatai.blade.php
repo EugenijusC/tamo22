@@ -30,7 +30,69 @@
         .neislaikytas{
             background: var(--bs-danger);
         }
-    </style>
+.containerP{
+    margin:2em;
+    text-align: center;
+    display: none;
+  }
+  
+  .loader {
+    margin:auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 6px solid #bdc3c7;
+    width: 50px;
+    height: 50px;
+    border-top-color: #1abc9c;
+    border-bottom-color: #3498db;
+    border-radius: 50%;
+    animation: coloredspin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0%{
+      transform: rotate(0deg);
+    }
+    100%{
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes coloredspin {
+    0%{
+      transform: rotate(0deg) scale(1.5);
+      border-top-color: #1abc9c;
+      border-bottom-color: #1abc9c;
+    }
+    25% {
+      border-top-color: #2ecc71;
+      border-bottom-color: #2ecc71;
+    }
+    50% {
+      transform: rotate(360deg) scale(0.5);
+      border-top-color: #3498db;
+      border-bottom-color: #3498db;
+    }
+    75% {
+      border-top-color: #9b59b6;
+      border-bottom-color: #9b59b6;
+    }
+    100%{
+      transform: rotate(720deg) scale(1.5);
+      border-top-color: #1abc9c;
+      border-bottom-color: #1abc9c;
+    }
+  }
+  
+  @keyframes appear {
+    0%{
+      opacity: 0;
+    }
+    100%{
+      opacity: 1;
+    }
+  }
+</style>
 @endsection
 
 @section('main_content')
@@ -62,7 +124,7 @@
             <select name="kontr" class="form-control" style="text-align-last: center;">
             <option value="0">--Visi kontrolieriai--</option>
                 @foreach($usrs_centras as $js) 
-                    <option value="{{ $js->id }}" @if ( $kontr == $js->id) selected="selected" @endif>
+                    <option value="{{ $js->id }}" @if ( $kontr == $js->id  ) selected="selected" @endif>
                         {{ $js->name }} </option> 
                 @endforeach
             </select>
@@ -86,18 +148,19 @@
         </div>
         </div>
         <br>
-        <button type="submit" class="btn btn-success">Ieškoti</button>
+        <button type="submit" class="btn btn-success searchButton">Ieškoti</button>
+        <a href="{{ url('/users/export') }}" class="btn btn-xs btn-info pull-right d-none">Excel</a>
 
     </form>
-
-
-
-
-    <br>  <br>
+ <br>
     <h1>Rezultatai</h1>
-
+    <div class="containerP">
+        <div class="loader"  id="animationWindow"></div>
+    </div>
 <!-- <span class="badge bg-danger">ffffaaw er er <i class="fa fa-thumbs-up"></i></span> -->
 </div>
+@if (count($rez))  
+<div class="containerLent">
     <div class="container-xxl pirmas px-0">
         <div class="row row-cols-6 fs-4 border-bottom">
             <div class="col text-center ">Vardas</div>
@@ -110,6 +173,7 @@
         </div>
     </div>
 
+  
     @foreach($rez as $el)
       
         <div class="container-xxl bg-white px-0 ">
@@ -145,7 +209,10 @@
         <div class="bg-white px-4 py-3 nav-link center">
            {{ $rez->appends(['data_nuo' => request()->data_nuo,'data_iki' => request()->data_iki, 'kontr' => request()->kontr,'centras' => request()->centras  ])->links() }}
         </div>
-    
+    </div>
+@else
+            <p>Nėra rezultatų</p>
+@endif    
      
 
 
@@ -170,6 +237,21 @@
             dataIKI.valueAsDate = date123;
         }
       //  console.log( navigator.connection.downlink);
+
+      const progresBAR = document.querySelector(".containerP");
+      const lentele = document.querySelector(".containerLent");
+      const paieska_btn = document.querySelector(".searchButton");
+      paieska_btn.addEventListener('click',() => {
+                progresBAR.style.cssText = `
+                    display:flex;
+                    `;
+                lentele.style.cssText = `
+                    display:none;
+                    `;
+                
+                });
+      
+
     </script>
 
 

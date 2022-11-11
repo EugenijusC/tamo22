@@ -13,30 +13,61 @@ class Rezultatai extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function scopeRez($query,$admin,$nuo,$iki,  $puslapiavimas,$kontr=0,$centras=-1) {
+    public function scopeRez($query,$admin,$nuo,$iki,  $puslapiavimas,$kontr=-1,$centras) {
 
-        switch ($kontr) {
+        switch ($admin) {
             case 0:
-                break;
-            default:
-                $query->where('users_id', $kontr);
-        }
+               // dd($admin);
+                $query->where('users_id', $kontr)
+                ->whereBetween('testas_pradzia',[$nuo,$iki])
+                ->orderBy('testas_pradzia','desc');
 
-        switch ($centras) {
-            case -1:
-                break;
+                $query->with('users')
+                ->whereHas('users', function($query) use ($centras){
+                 $query->where('centras', $centras);
+                });
+                   break; 
+            case 1: 
+                switch ($kontr) {
+                    case -1:
+                        $query->whereBetween('testas_pradzia',[$nuo,$iki])
+                        ->orderBy('testas_pradzia','desc');
+                         if($centras <> -1) {
+                            $query->with('users')
+                                ->whereHas('users', function($query) use ($centras){
+                                 $query->where('centras', $centras); });
+                         };
+                        break;
+                    default:
+                        $query->where('users_id', $kontr)
+                        ->whereBetween('testas_pradzia',[$nuo,$iki])
+                        ->orderBy('testas_pradzia','desc');
+                        if($centras <> -1) {
+                            $query->with('users')
+                                ->whereHas('users', function($query) use ($centras){
+                                 $query->where('centras', $centras); });
+                         };
+                }
+                
             default:
-               $query->with('users')
-               ->whereHas('users', function($query) use ($centras){
-                $query->where('centras', $centras);
-               });
-              //dd(users()->centras);
-        }
+               break;
+        };
+     //   dd($centras);
 
-        return $query->whereBetween('testas_pradzia',[$nuo,$iki])
-            ->orderBy('testas_pradzia','desc')
-          //  ->where('users_id', $kontr)
-            ->paginate($puslapiavimas);
+       
+
+        // switch ($centras) {
+        //     case -1:
+        //         break;
+        //     default:
+        //        $query->with('users')
+        //        ->whereHas('users', function($query) use ($centras){
+        //         $query->where('centras', $centras);
+        //        });
+
+        
+
+        return $query->paginate($puslapiavimas);
     }
 
 

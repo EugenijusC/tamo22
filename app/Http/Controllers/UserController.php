@@ -12,15 +12,36 @@ use Illuminate\Support\Facades\Config;
 use App\Contact;
 
 
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Facades\DownloadExcel;
 use Carbon\Carbon;
 
 class UserController extends Controller
 {
-//    public function __construct()
-//    {
-//        $this->middleware('auth');
-//    }
 
+    public function export() 
+{
+    return Excel::download(new UsersExport, 'usee.xlsx');
+}
+
+  //      public function export(Request $request) 
+ //       {
+ //        $centras=empty($request->centras) ? '99' : $request->centras; 
+          //  return Excel::download(new UsersExport, 'users-'+time()+'.xlsx');
+         //   return (new UsersExport)->download('invoices.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+         
+         
+         //return (new UsersExport)->download('invoices.xlsx');
+ //        return (new UsersExport($centras))->download('users'.$centras.'.xlsx');
+ //       }
+
+        // public function action(Request $request) 
+        // {
+        //     return [
+        //         (new DownloadExcel)->withHeadings(),
+        //     ];
+        // }
 
 //    public function index() {
 //        $user =Auth::user();
@@ -32,6 +53,9 @@ class UserController extends Controller
 //        return redirect()->route('start');
 //    }
 
+    public function loginT() {
+        return view('user.login_tuv', compact([]));
+    }
 
 
 

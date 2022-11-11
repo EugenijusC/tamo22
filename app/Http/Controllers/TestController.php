@@ -127,18 +127,44 @@ class TestController extends Controller
 
     public function rezults(Request $request) {
 
+        if (empty(Auth::user()->id)){
+            abort(419); //jei baigiasi sesija tegul mestų lauk
+        }
+
         $ir_sk = '\Config'::get('constants.puslapiavimas.rez_row_per_page');
        // $propertiesRez= Rezultatai::query();
+
+      //dd(Auth::user()->centras);
         $adminas=(empty(Auth::user()->is_admin) ? 0: 1);
         $nuo=(empty($request->data_nuo)) ? date('Y-m-d', strtotime(now().'-31 day')) : $request->data_nuo;
-        $iki=(empty($request->data_iki)) ? date('Y-m-d', strtotime(now().'+1 day')) : date('Y-m-d', strtotime($request->data_iki.'+1 day')) ;
-        $user = Auth::id();
-        $c = empty(Auth::user()->centras) ? '-1' : Auth::user()->centras;
-        $centras=(empty($request->centras) or $request->centras =='99') ? '-1' : $request->centras;
+        $iki=(empty($request->data_iki)) ? date('Y-m-d', strtotime(now().'+1 day')) : date('Y-m-d', strtotime($request->data_iki)) ;
+      //  $user = Auth::id();
+        
+        if($adminas){
+            $c =-1;
+            $centras=(empty($request->centras) or $request->centras =='99') ? $c : $request->centras;
+            $k = empty($request->kontr) ? -1 : $request->kontr ;
+        }
+        else {
+            $c = empty(Auth::user()->centras) ? '-1' : Auth::user()->centras;
+            $centras=(empty($request->centras) or $request->centras =='99') ? $c : $request->centras;
+            $k = empty($request->kontr) ? Auth::user()->id : $request->kontr ;
+        }
+      
+        $Rezultatai=Rezultatai::Rez($adminas,$nuo,$iki,12,$k,$centras);
+      
+        if($c == -1) {
+            $useriai = USER::orderBy('name')->get();
+        } else {
+            $useriai = USER::where('centras','=',"{$c}")->orderBy('name')
+            ->where('id', Auth::user()->id)
+            ->get();
+        };
+      //  dd(App::getLocale() );
 
-        $user_list = Rezultatai::distinct('users_id')->orderBy('users_id')->get();
+     //   $user_list = Rezultatai::distinct('users_id')->orderBy('users_id')->get();
     //    $k=0;      
-        $k = empty($request->kontr) ? 0: $request->kontr ;
+        
 
        
 
@@ -155,7 +181,7 @@ class TestController extends Controller
         //       ->with('users')
         //       ->paginate(12);
         //     };
-            $Rezultatai=Rezultatai::Rez($adminas,$nuo,$iki,12,$k,$centras);
+            
 
            // dd($Rezultatai);
 
@@ -165,11 +191,7 @@ class TestController extends Controller
         //      ->where('users_id', $user)
         //      ->paginate($ir_sk) ;
         //  }
-        if($c == -1) {
-            $useriai = USER::orderBy('name')->get();
-        } else {
-            $useriai = USER::where('centras','=',"{$c}")->orderBy('name')->get();
-        };
+       
 
        
        // dd($Rezultatai);
