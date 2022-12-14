@@ -174,7 +174,7 @@ h1 {
 
 <div class="container">
   <div class="brand-logo"></div>
-  <div class="brand-title">TUVLITA</div>
+  <div class="brand-title">IRIS</div>
   <div class="inputs">
     <label>El.paštas</label>
     <input type="email" placeholder="pastas@test.lt" />
@@ -195,6 +195,9 @@ h1 {
 
 </span>
 
-    
+-----------------
+{{ trans_choice(':count namas|:count namai|:count namų',121) }}
+
+
 </body>
 </html>

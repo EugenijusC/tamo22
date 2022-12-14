@@ -109,4 +109,10 @@ class ContactController extends Controller
         Contact::destroy($id);
         return redirect()->route('kontaktai.index')->with('success', 'Kontaktas ištrintas');
     }
+
+
+    public function __invoke(Request $request)
+    {
+        
+    }
 }

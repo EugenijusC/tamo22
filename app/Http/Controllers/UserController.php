@@ -8,7 +8,6 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
-
 use App\Contact;
 
 
@@ -57,6 +56,9 @@ class UserController extends Controller
         return view('user.login_tuv', compact([]));
     }
 
+    public function mailU() {
+        return view('mail.user.password', compact([]));
+    }
 
 
 
@@ -137,8 +139,11 @@ class UserController extends Controller
         ])) {
             session()->flash('success', 'Sėkmingai prisijungėte '.$request->name);
             if (Auth::user()->is_admin) {
+              //  Debugbar::addMessage('ddd');
+                \Debugbar::enable();
                 return redirect()->route('admin.index');
             } else {
+                \Debugbar::disable();
                 return redirect()->home();
             }
         }
@@ -160,6 +165,11 @@ class UserController extends Controller
     public function klausimai()
     {
         $klausimai = Klausimai::all();
+    }
+
+    public function forgot()
+    {
+        return view('user.forgot-password');
     }
 
 }

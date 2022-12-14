@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config; 
+use Barryvdh\Debugbar\Twig\Extension\Debug;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,7 @@ Route::view('/', 'welcome')->name('home');
 
 Route::get('/users/export/', 'UserController@export')->name('export');
 Route::get('/users/login_tuv/', 'UserController@loginT')->name('loginT');
-
+Route::get('/mail/user/', 'UserController@mailUser')->name('mailU');
 
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
@@ -43,6 +44,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'admi
 
 Route::group(['middleware' => 'web'], function () {
     Route::get('/register', 'UserController@create')->name('register.create');
+    Route::get('/forgot-password', 'UserController@forgot')->name('password.request');
+
+
+
+
     Route::post('/register', 'UserController@store')->name('register.store');
     Route::get('/login', 'UserController@loginForm')->name('login.create');
     Route::post('/login', 'UserController@login')->name('login');
