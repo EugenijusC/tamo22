@@ -26,8 +26,9 @@ class TestController extends Controller
     }
 
     public function testas(Request $request) {
-        $testoT =($request->testoTipas == 0 ? 'S':'N');
-        $testoT1 =($request->testoTipas == 0 ? 'gr_sk_standart':'gr_sk_naujienos');
+        $testTipas=$request->testoTipas;
+        $testoT =($testTipas == 'S' ? 'S':'N');
+        $testoT1 =($testTipas == 'S' ? 'gr_sk_standart':'gr_sk_naujienos');
 
         $kl_sk_gr=DB::table('grupes')->select($testoT1.' as sk','grupe','gr_pavadinimas')->get();
         //dd($kl_sk_gr);    
@@ -66,7 +67,9 @@ class TestController extends Controller
         //dd($numbers);
         date_default_timezone_set('Europe/Vilnius');
         $user = Auth::id();
-        $id = DB::table('rezultatais')->insertGetId(  [ 'users_id' => $user, 'rez_atsak' => $maisymas, 'testas_laikas' =>$laikas, 'testas_pradzia' =>date('Y/m/d H:i:s', time())]);
+        $id = DB::table('rezultatais')->insertGetId(  [ 'users_id' => $user, 'rez_atsak' => $maisymas, 'testas_laikas' =>$laikas, 
+                    'testas_tipas' =>$testTipas, 
+                    'testas_pradzia' =>date('Y/m/d H:i:s', time())]);
 
         foreach ($klausimai as $kl) {
               //$ats=strval($kl->klaus_teisingas1).strval($kl->klaus_teisingas2).strval($kl->klaus_teisingas3).strval($kl->klaus_teisingas4);
@@ -137,7 +140,7 @@ class TestController extends Controller
       //dd(Auth::user()->centras);
         $adminas=(empty(Auth::user()->is_admin) ? 0: 1);
         $nuo=(empty($request->data_nuo)) ? date('Y-m-d', strtotime(now().'-31 day')) : $request->data_nuo;
-        $iki=(empty($request->data_iki)) ? date('Y-m-d', strtotime(now().'+1 day')) : date('Y-m-d', strtotime($request->data_iki)) ;
+        $iki=(empty($request->data_iki)) ? date('Y-m-d', strtotime(now().'+1 day')) : date('Y-m-d', strtotime($request->data_iki.'+1 day')) ;
       //  $user = Auth::id();
         
         if($adminas){
@@ -151,7 +154,7 @@ class TestController extends Controller
             $k = empty($request->kontr) ? Auth::user()->id : $request->kontr ;
         }
       
-        $Rezultatai=Rezultatai::Rez($adminas,$nuo,$iki,12,$k,$centras);
+        $Rezultatai=Rezultatai::Rez($adminas,$nuo,$iki,200,$k,$centras);
       
         if($c == -1) {
             $useriai = USER::orderBy('name')->get();
@@ -198,7 +201,7 @@ class TestController extends Controller
 
     
 
-        return view('user.rezultatai', ['rez' => $Rezultatai,   'nuo' =>$nuo,  'iki' => $iki, 'usrs_centras' => $useriai,'kontr' => $k,'centras' =>$centras ] );
+        return view('user.rezultatai', ['rez' => $Rezultatai,   'nuo' =>$nuo,  'iki' => $request->data_iki, 'usrs_centras' => $useriai,'kontr' => $k,'centras' =>$centras ] );
     }
 
 //-------------------------------------------------------------------------------------------------------------------

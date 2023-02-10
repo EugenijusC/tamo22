@@ -40,7 +40,7 @@
                           <option value="6">Šiaulių TAC</option>
                           <option value="7">Telšių TAC</option>
                           <option value="8">Panevėžio TAC</option>
-                          <option value="8">Utenos TAC</option>
+                          <option value="9">Utenos TAC</option>
 
                 </select>
 

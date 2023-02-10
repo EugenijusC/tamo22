@@ -63,7 +63,8 @@
                       <th style="width: 40px">Vardas</th>
                       <th >El.paštas</th>
                       <th>Centras</th>
-                      <th>Adminas</th>
+                      <th>C.adminas</th>
+                      <th>Super adminas</th>
                       <th>Veiksmai</th>
                     </tr>
                   </thead>

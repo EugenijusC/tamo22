@@ -104,12 +104,12 @@
 
 
 
- 
+
 
 
 <div class="register-box">
     <div class="register-logo">
-        <b>Priminti slaptažodį?</b>
+        <b>Sukurti slaptažodį</b>
     </div>
 
     <div class="card">
@@ -152,12 +152,29 @@
                     </div>
                 </div>
 
+                <div class="input-group mb-3">
+                    <input type="password" name="password" class="form-control" placeholder="Slaptažodis">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group mb-3">
+                    <input type="password" name="password_confirmation" class="form-control" placeholder="Pakartokite slaptažodį">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
               
 
                 <div class="row">
                     <!-- /.col -->
-                    <div class="offset-4">
-                        <button type="submit" class="btn btn-primary btn-block">Siųsti prisijungimo nuorodą</button>
+                    <div class="offset-9">
+                        <button type="submit" class="btn btn-primary btn-block">Saugoti</button>
                     </div>
                     <!-- /.col -->
                 </div>

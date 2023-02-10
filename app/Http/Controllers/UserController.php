@@ -7,6 +7,7 @@ use App\Klausimai;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Config;
 use App\Contact;
 
@@ -169,7 +170,59 @@ class UserController extends Controller
 
     public function forgot()
     {
+        
         return view('user.forgot-password');
+    }
+    public function forgot_store(Request $request)
+    {
+      //  dd($request);
+        $request->validate([
+          
+            'email' => 'required|string|email',
+          
+        ]);
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
+//dd(($status));
+        if ($status === Password::RESET_LINK_SENT) {
+            return back()->with('status', trans($status));
+        }
+
+        return back()->withInput($request->only('email'))
+                     ->withErrors(['email' => trans($status)]);
+    
+    }
+
+    public function passw_store(Request $request)
+    {
+        $request->validate([
+            'token' => ['required'],
+            'email' => ['required', 'email'],
+            'password' => ['required', 'confirmed', 'min:8']
+        ]);
+
+        $status = Password::reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function ($user) use ($request) {
+                $user->forceFill([
+                    'password' => bcrypt($request->password),
+                    'remember_token' => Str::random(60)
+                ])->save();
+            }
+        );
+
+        if ($status === Password::PASSWORD_RESET) {
+            return redirect()->route('login')->with('status', trans($status));
+        }
+
+        return back()->withInput($request->only('email'))
+                     ->withErrors(['email' => trans($status)]);
+    }
+      
+    public function passw_create(Request $request)
+    {
+        return view('user.reset-password', ['request' => $request]);
     }
 
 }

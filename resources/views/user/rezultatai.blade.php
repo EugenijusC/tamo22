@@ -20,6 +20,7 @@
         }
         .pirmas{
             background: var(--bs-green);
+            max-width: 1520px;
         }
         .pirmas .col{
             color: whitesmoke;
@@ -161,24 +162,25 @@
 </div>
 @if (count($rez))  
 <div class="containerLent">
-    <div class="container-xxl pirmas px-0">
-        <div class="row row-cols-6 fs-4 border-bottom">
+    <div class="container pirmas px-0">
+        <div class="row row-cols-4 fs-4 border-bottom">
             <div class="col text-center ">Vardas</div>
             <div class="col text-center ">Data</div>
-            <div class="col  text-center">Pažangumas</div>
-            <div class="col  text-center">Teisingi </div>
-            <div class="col  text-center">Klaidingi</div>
-            <div class="col  text-center">Centras</div>
-            <div class="col  text-center">&nbsp</div>
+            <div class="col text-center">Pažangumas</div>
+            <div class="col text-center">Teisingi </div>
+            <div class="col text-center">Klaidingi</div>
+            <div class="col text-center">Centras</div>
+            <div class="col text-center">Tipas</div>
+            <div class="col text-center">&nbsp</div>
         </div>
     </div>
 
   
     @foreach($rez as $el)
       
-        <div class="container-xxl bg-white px-0 ">
+        <div class="container bg-white px-0 ">
             <div class="row row-cols-6 border-bottom">
-                <div class="col text-center ">{{ $el->users['name'] }}</div>
+                <div class="coltext-center ">{{ $el->users['name'] }}</div>
                 <div class="col text-center ">{{ $el->testas_pradzia }}</div>
                 @php
                     $nesprestas='';
@@ -199,6 +201,7 @@
                 <div class="col  text-center">{{$el->testas_teisingi}} </div>
                 <div class="col  text-center">{{$el->testas_klaidingi}}</div>
                 <div class="col  text-center">{{$el->users['centras']}}</div>
+                <div class="col  text-center">{{$el->testas_tipas }}</div>
                 <div class="col  text-center"><a href=" {{ route('rezults_smulkiai',$el->id) }}" class="btn btn-primary">Smulkiau</a></div>
             </div>
         </div>

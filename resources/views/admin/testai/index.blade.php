@@ -50,7 +50,8 @@
                       <th >Pažangumas</th>
                       <th >Teisingi</th>
                       <th >Klaidingi</th>
-                      <th>Veiksmai</th>
+                      <th>Tipas</th>
+                      <th>Veiksmai</th>                      
                     </tr>
                   </thead>
                   <tbody>
@@ -62,6 +63,7 @@
                         <td>{{ $testas->testas_pazangumas }}</td>
                         <td>{{ $testas->testas_teisingi }}</td>
                         <td>{{ $testas->testas_klaidingi }}</td>
+                        <td>{{ $testas->testas_tipas }}</td>
                         <td>
                             <!-- <a href="{{ route('testai.edit',$testas->id) }}"
                                                        class="btn btn-info btn-sm float-left mr-1">

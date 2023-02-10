@@ -25,6 +25,7 @@ Route::get('/users/login_tuv/', 'UserController@loginT')->name('loginT');
 Route::get('/mail/user/', 'UserController@mailUser')->name('mailU');
 
 
+
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
     Route::get('/', 'MainController@index')->name('admin.index');
     Route::resource('/klausimai','KlausimaiController');
@@ -35,6 +36,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'admi
     //Route::get('/testai/{id}', 'TestController@edit')->name('testas_smulkiai');
     Route::get('/rezults/{id}/{name?}', 'TestaiController@testas_sm')->name('testas_smulkiai');
 
+    
 
     // Route::resource('/klausimai', 'CategoryController');
     // Route::resource('/tags', 'TagController');
@@ -44,10 +46,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'admi
 
 Route::group(['middleware' => 'web'], function () {
     Route::get('/register', 'UserController@create')->name('register.create');
+
     Route::get('/forgot-password', 'UserController@forgot')->name('password.request');
-
-
-
+    Route::post('/forgot-password', 'UserController@forgot_store')->name('password.request2');
+    
+    Route::get('/reset-password', 'UserController@passw_create')->name('password.reset');
+//Route::post('/reset-password', [ResetPasswordController::class, 'store'])->name('password.update');
 
     Route::post('/register', 'UserController@store')->name('register.store');
     Route::get('/login', 'UserController@loginForm')->name('login.create');

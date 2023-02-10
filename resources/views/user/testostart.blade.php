@@ -206,17 +206,24 @@
                 <label class="form-label form-label-left form-label-auto" id="label_8" for="input_8"> Testo tipas </label>
                 <div id="cid_8" class="form-input" data-layout="full">
                     <div class="form-single-column" role="group" aria-labelledby="label_8" data-component="radio">
+            <span class="form-radio-item" style="clear:left" >
+              <span class="dragger-item">
+              </span>
+              <input type="radio" class="form-radio" id="input_8_0" name="testoTipas"  value="S"  />
+              <label id="label_input_8_0" for="input_8_0"> Standartinis </label>
+            </span>
             <span class="form-radio-item" style="clear:left">
               <span class="dragger-item">
               </span>
-              <input type="radio" class="form-radio" id="input_8_0" name="testoTipas" checked="" value="0" />
-              <label id="label_input_8_0" for="input_8_0"> Standartinis </label>
+              <input type="radio" class="form-radio" id="input_8_1" name="testoTipas" checked="" value="N" />
+              <label id="label_input_8_1" for="input_8_1"> Naujienos </label>
             </span>
-                        <span class="form-radio-item" style="clear:left">
+
+            <span class="form-radio-item" style="clear:left; " hidden>
               <span class="dragger-item">
               </span>
-              <input type="radio" class="form-radio" id="input_8_1" name="testoTipas" value="1" />
-              <label id="label_input_8_1" for="input_8_1"> Naujienos </label>
+              <input type="radio" class="form-radio" id="input_8_2" name="testoTipas" value="P" />
+              <label id="label_input_8_2" for="input_8_2"> Specialus </label>
             </span>
                     </div>
                 </div>

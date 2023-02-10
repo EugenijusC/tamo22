@@ -25,20 +25,21 @@ body {
   place-items: center;
   overflow: hidden;
   font-family: poppins;
-  background-image: url('https://www.tuvlita.lt/wp-content/uploads/2022/03/mokymai-vidinis.jpg') ;
+  background-image: url('https://images.unsplash.com/photo-1565468069441-6e49563b02fa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2831&q=80') ;
   background-size: cover ;
 }
 
 .container {
   position: relative;
-  margin-left: -50em;
+  margin-left: -70em;
   width: 350px;
   height: 500px;
   border-radius: 20px;
   padding: 40px;
+  margin-top: -10em;
   box-sizing: border-box;
   background: #ecf0f3;
-  box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+  box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px grey;
 }
 
 .brand-logo {
@@ -194,9 +195,9 @@ h1 {
   <div class="style_prevu_kit" style="background-color:#93a6a8;"></div>
 
 </span>
-
+<!-- 
 -----------------
-{{ trans_choice(':count namas|:count namai|:count namų',121) }}
+{{ trans_choice(':count namas|:count namai|:count namų',121) }} -->
 
 
 </body>
