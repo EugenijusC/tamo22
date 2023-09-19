@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
 use App\Rezultatai;
+use App\klausimu_analizei;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -67,10 +67,29 @@ class TestaiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        $request->validate([
+            //   'usr_search' => 'required',
+           ]);
 
+           $s =$request->usr_search;
+           $s='';
+         //  dd($s);
+
+           $c=$request->centras;
+   
+           if($c=='-visi-'){
+               $rez = klausimu_analizei::all();
+           }
+           else {
+               $rez = klausimu_analizei::where('centras','=', "{$c}")->where('name','LIKE', "%{$s}%")->paginate(50);
+           }
+   
+   $c=5;
+        //   dd($rez);
+           return view('admin.testai.search', compact('rez','s','c'));
+       
     }
 
     /**
@@ -110,5 +129,12 @@ class TestaiController extends Controller
 
         Rezultatai::destroy($id);
         return redirect()->route('testai.index')->with('success', "Testas $id ištrintas");
+    }
+
+    public function search_test(Request $request)
+    {
+        dd($request);
+        $testai =Rezultatai::orderBy('testas_pradzia', 'desc')->paginate(12);
+        return view('admin.testai.search', compact('testai'));
     }
 }

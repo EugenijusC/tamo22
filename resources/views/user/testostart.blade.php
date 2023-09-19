@@ -14,16 +14,10 @@
         .form-label.form-label-auto {
 
             display: inline-block;
-            float: left;
             text-align: left;
 
         }
-        .form-all {
-            border-radius: 3px;
-            box-shadow: 0 4px 4px rgb(87 100 126 / 21%);
-            background-color: #fff;
-            max-width: 752px;
-        }
+        
 
         .form-all {
             border-radius: 3px;
@@ -36,7 +30,7 @@
             display: flex;
             -ms-flex-direction: column;
             flex-direction: column;
-            margin: 72px auto;
+            margin: 12px auto;
             width: 100%;
         }
         *, :after, :before {
@@ -71,6 +65,7 @@
         div.header-large {
             margin: 0 -38px;
             padding: 2.5em 52px;
+            background-color: gold;
         }
         .header-large {
             border-color: #d7d8e1;
@@ -169,6 +164,10 @@
             cursor: pointer;
             font-weight: 500;
         }
+
+        label.disabled{
+            color: #C0C0C0;
+        }
         /* Injected CSS Code */
     </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
@@ -197,34 +196,130 @@
                 <div class="form-header-group  header-large">
                     <div class="header-text httal htvam">
                         <h1 id="header_9" class="form-header" data-component="header">
-                            Testo tipas
+                            Testas
                         </h1>
                     </div>
                 </div>
             </li>
+
             <li class="form-line" data-type="control_radio" id="id_8">
                 <label class="form-label form-label-left form-label-auto" id="label_8" for="input_8"> Testo tipas </label>
                 <div id="cid_8" class="form-input" data-layout="full">
-                    <div class="form-single-column" role="group" aria-labelledby="label_8" data-component="radio">
-            <span class="form-radio-item" style="clear:left" >
-              <span class="dragger-item">
-              </span>
-              <input type="radio" class="form-radio" id="input_8_0" name="testoTipas"  value="S"  />
-              <label id="label_input_8_0" for="input_8_0"> Standartinis </label>
-            </span>
-            <span class="form-radio-item" style="clear:left">
-              <span class="dragger-item">
-              </span>
-              <input type="radio" class="form-radio" id="input_8_1" name="testoTipas" checked="" value="N" />
-              <label id="label_input_8_1" for="input_8_1"> Naujienos </label>
-            </span>
+                    <div class="form-single-column" role="group" aria-labelledby="label_8" data-component="radio" id='testo_tipas'>
 
-            <span class="form-radio-item" style="clear:left; " hidden>
-              <span class="dragger-item">
-              </span>
-              <input type="radio" class="form-radio" id="input_8_2" name="testoTipas" value="P" />
-              <label id="label_input_8_2" for="input_8_2"> Specialus </label>
-            </span>
+                        <span class="form-radio-item" style="clear:left" >
+                        <span class="dragger-item">
+                        </span>
+                        <input type="radio" class="form-radio" id="input_8_S" name="testoTipas"  value="S"  />
+                        <label id="label_input_8_S" for="input_8_S"> Standartinis </label>
+                        </span>
+
+                        <span class="form-radio-item" style="clear:left">
+                        <span class="dragger-item">
+                        </span>
+                            <input type="radio" class="form-radio" id="input_8_N" name="testoTipas" checked value="N" />
+                        <label id="label_input_8_N" for="input_8_N"> Aktualijos </label>
+                        </span>
+                    </div>
+                </div>
+            </li>
+
+
+            <li class="form-line" data-type="control_radio" id="id_8">
+                <label class="form-label form-label-left form-label-auto" id="label_8" for="input_8"> Grupė </label>
+                <div id="cid_8" class="form-input" data-layout="full">
+                    <div class="form-single-column" role="group" aria-labelledby="label_8" data-component="radio">
+                    <span class="form-radio-item " style="clear:left">
+                    <span class="dragger-item">
+                    </span>
+                        <input type="radio" class="form-radio " id="input_8_A" name="testoTipasG" disabled  value="A" />
+                    <label id="label_input_8_A" for="input_8_A" class="disabled"> Visos grupės </label>
+                    </span>
+
+                    <span class="form-radio-item " style="clear:left">
+                    <span class="dragger-item">
+                    </span>
+                        <input type="radio" class="form-radio " id="input_8_0" name="testoTipasG" disabled value="0" />
+                    <label id="label_input_8_0" for="input_8_0" class="disabled"> 0 grupė </label>
+                    </span>
+
+                    <span class="form-radio-item " style="clear:left">
+                    <span class="dragger-item">
+                    </span>
+                        <input type="radio" class="form-radio" id="input_8_1" name="testoTipasG" checked value="1" />
+                        <label id="label_input_8_1" for="input_8_1" class="enabled"> 1 grupė </label>
+                    </span>
+
+                    <span class="form-radio-item " style="clear:left">
+                    <span class="dragger-item">
+                    </span>
+                        <input type="radio" class="form-radio" id="input_8_2" name="testoTipasG" disabled value="2" />
+                    <label id="label_input_8_2" for="input_8_2" class="disabled"> 2 grupė </label>
+                    </span>
+
+                    <span class="form-radio-item " style="clear:left">
+                    <span class="dragger-item">
+                    </span>
+                        <input type="radio" class="form-radio" id="input_8_3" name="testoTipasG" disabled value="3" />
+                    <label id="label_input_8_3" for="input_8_3" class="disabled"> 3 grupė </label>
+                    </span>
+
+                    <span class="form-radio-item " style="clear:left">
+                    <span class="dragger-item">
+                    </span>
+                        <input type="radio" class="form-radio" id="input_8_4" name="testoTipasG" disabled value="4" />
+                    <label id="label_input_8_4" for="input_8_4" class="disabled"> 4 grupė </label>
+                    </span>
+
+                    <span class="form-radio-item " style="clear:left">
+                    <span class="dragger-item">
+                    </span>
+                        <input type="radio" class="form-radio" id="input_8_5" name="testoTipasG" disabled value="5" />
+                    <label id="label_input_8_5" for="input_8_5" class="disabled"> 5 grupė </label>
+                    </span>
+
+                    <span class="form-radio-item " style="clear:left">
+                    <span class="dragger-item">
+                    </span>
+                        <input type="radio" class="form-radio" id="input_8_6" name="testoTipasG" disabled value="6" />
+                    <label id="label_input_8_6" for="input_8_6" class="disabled"> 6 grupė </label>
+                    </span>
+
+                    <span class="form-radio-item " style="clear:left">
+                    <span class="dragger-item">
+                    </span>
+                        <input type="radio" class="form-radio" id="input_8_7" name="testoTipasG" disabled value="7" />
+                    <label id="label_input_8_7" for="input_8_7" class="disabled"> 7 grupė </label>
+                    </span>
+
+                    <span class="form-radio-item " style="clear:left">
+                    <span class="dragger-item">
+                    </span>
+                        <input type="radio" class="form-radio" id="input_8_8" name="testoTipasG"  value="8" />
+                    <label id="label_input_8_8" for="input_8_8" class="enabled"> 8 grupė </label>
+                    </span>
+
+                    <span class="form-radio-item " style="clear:left">
+                    <span class="dragger-item">
+                    </span>
+                        <input type="radio" class="form-radio" id="input_8_11" name="testoTipasG" disabled value="11" />
+                    <label id="label_input_8_11" for="input_8_11" class="disabled"> 11 grupė </label>
+                    </span>
+
+                    <span class="form-radio-item " style="clear:left">
+                    <span class="dragger-item">
+                    </span>
+                        <input type="radio" class="form-radio" id="input_8_15" name="testoTipasG" disabled value="15" />
+                    <label id="label_input_8_15" for="input_8_15" class="disabled"> CTADB </label>
+                    </span>
+
+                    <span class="form-radio-item " style="clear:left">
+                    <span class="dragger-item">
+                    </span>
+                        <input type="radio" class="form-radio" id="input_8_16" name="testoTipasG" disabled value="16" />
+                    <label id="label_input_8_16" for="input_8_16" class="disabled"> Darbų sauga</label>
+                    </span>
+            
                     </div>
                 </div>
             </li>
@@ -247,6 +342,44 @@
 
 
 </div>
+<script>//selecting the input.
+        const input_s = document.querySelector('#input_8_S');
+        const input_n = document.querySelector('#input_8_N');
+        
+        const input_a = document.querySelector('#input_8_A');
+        const input_a_l = document.querySelector('#label_input_8_A');
+        const input_1 = document.querySelector('#input_8_1');
+        const input_1_l = document.querySelector('#label_input_8_1');
+        
+        
+        // Standartinis testas
+        input_s.addEventListener("click", function(e){
+            //console.log('input: ', input_s.value);
+            input_a.disabled=false;
+            input_a_l.classList.remove("disabled");
+            input_a_l.classList.add("enabled");
 
+            input_1.disabled=true;
+            input_1_l.classList.remove("enabled");
+            input_1_l.classList.add("disabled");
+
+            input_a.checked =true;     
+        });
+
+        // Aktualijų testas
+        input_n.addEventListener("click", function(e){
+            //console.log('input: ', input_n.value);
+             input_1.disabled=false;
+             input_1_l.classList.remove("disabled");
+             input_1_l.classList.add("enabled");
+
+             input_a.disabled=true;
+             input_a_l.classList.remove("enabled");
+             input_a_l.classList.add("disabled");
+
+             input_1.checked =true;     
+        })
+        
+    </script>
 </body>
 </html>

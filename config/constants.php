@@ -13,7 +13,7 @@ return [
     ],
     'testo_laikas' => [
         'time_standart' => '30',
-        'time_news' => '60',
+        'time_news' => '30',
     ],
     'tacai'=> [
         

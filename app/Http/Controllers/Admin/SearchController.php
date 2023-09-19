@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 use App\User;
+use App\Klausimai;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -27,4 +28,8 @@ class SearchController extends Controller
         
         return view('admin.useriai.search', compact('users','s','c'));
     }
+
+    
+
+ 
 }

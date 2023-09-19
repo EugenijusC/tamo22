@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Vartotojai</h1>
+                    <h1>Testai</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="/admin">Home</a></li>
-                        <li class="breadcrumb-item active">Blank Page</li>
+                        <li class="breadcrumb-item"><a href="/admin">Pradžia</a></li>
+                        <!-- <li class="breadcrumb-item active">Blank Page</li> -->
                     </ol>
                 </div>
             </div>
@@ -21,37 +21,14 @@
 
     <div class="card-body">
         <!-- <a href="{{ route('kontaktai.create') }}" class="btn btn-primary mb-3">Pridėti klausimą</a> -->
-        
-        
 
+    @if (count($rez))
 
-    @if (count($users))
-
-    <div class="row mb-2">
-        <div class="col-sm-6">  
-            <a class="btn btn-warning" href="/admin/useriai">Atgal</a>
-        </div>
-        <div class="col-sm-6">  
-            <h2 class="text-gray text-sm-start " style="text-align: right" >
-                Filtras: 
-                @if($s)
-                    vardas  {{ $s }}
-                @endif
-
-                @if($c)
-                    , centras {{ $c }}
-                @endif
-
-            </h2>
-
-        </div>
-    </div>
-
-  
-                
-
-               
-
+            <div class="card-header">
+                <div class="card-tools">
+              {{ count($rez)}}
+                </div>
+              </div>
 
              
 
@@ -61,30 +38,32 @@
                     <tr>
                       <th style="width: 10px">#</th>
                       <th style="width: 40px">Vardas</th>
-                      <th >El.paštas</th>
-                      <th>Centras</th>
-                      <th>C.adminas</th>
-                      <th>Super adminas</th>
-                      <th>Veiksmai</th>
+                      <th>Data</th>
+                      <th >Pažangumas</th>
+                      <th >Teisingi</th>
+                      <th >Klaidingi</th>
+                      <th>Tipas</th>
+                      <th>Veiksmai</th>                      
                     </tr>
                   </thead>
                   <tbody>
-                  @foreach($users as $user)
+                  @foreach($rez as $testas)
                     <tr>
-                        <td>{{ $user->id }}</td>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>{{ $user->centras }}</td>
-                        <td>{{ $user->is_centroadmin }}</td>
-                        <td>{{ $user->is_admin }}</td>
- 
+                        <td>{{ $testas->id }}</td>
+                        <td>{{ $testas->users['name'] }}</td>
+                        <td>{{ $testas->testas_pradzia }}</td>
+                        <td>{{ $testas->testas_pazangumas }}</td>
+                        <td>{{ $testas->testas_teisingi }}</td>
+                        <td>{{ $testas->testas_klaidingi }}</td>
+                        <td>{{ $testas->testas_tipas }}</td>
                         <td>
-                            <a href="{{ route('useriai.edit',$user->id) }}"
+                            <!-- <a href="{{ route('testai.edit',$testas->id) }}"
                                                        class="btn btn-info btn-sm float-left mr-1">
                                                         <i class="fas fa-pencil-alt"></i>
-                                                    </a>
+                                                    </a> -->
+                                                    <a href=" {{ route('testas_smulkiai',[$testas->id, $testas->users['name'] ]) }}" target="_blank" class="btn btn-info btn-sm float-left mr-1">Smulkiau</a>
 
-                            <form action="{{ route('useriai.destroy', $user->id) }}" method="post" class="float-left">
+                            <form action="{{ route('testai.destroy', $testas->id) }}" method="post" class="float-left">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm"
@@ -102,29 +81,13 @@
              
     </div>
     @else
-            <p> Nėra rezultatų</p>
-            
-
-                <div class="row mb-2">
-            <div class="col-sm-6">  
-                <a class="btn btn-warning" href="/admin/useriai">Atgal</a>
-            </div>
-            <div class="col-sm-6">  
-                <h2 class="text-info" style="text-align: right">
-                Filtras: 
-                @if($s == 'A' )
-                    vardas  {{!! $s !!}}
-                @endif
-                    , centras {{!! $c !!}}</h2>
-            </div>
-    </div>
-
+            <p> Nera testų</p>
     @endif  
     </div>
     <div class="card-footer my-0">
             <div class="row my-0">
                 <div class="col-sm-6 my-0">
-                {{ $users->appends(['usr_search' => request()->usr_search,'centras' => request()->centras  ])->links() }}
+                {{ $rez->links() }}
                     {{--<ul class="pagination  my-0 float-right">
                         <li class="page-item"><a class="page-link" href="#">«</a></li>
                         <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -135,7 +98,7 @@
                 </div>
                 <div class="col-sm-6 my-0">
                     <ol class="breadcrumb float-sm-right my-0">
-                        Viso: {{ $users->total() }}
+                        Viso: {{ $rez->total() }}
                     </ol>
                 </div>
             </div>

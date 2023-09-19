@@ -28,7 +28,7 @@
 
 
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-6 bg-secondary bg-gradient text-white border-bottom shadow-sm" style="background: #2d048d; padding: .1rem; max-height: 80px;">
-    <img src="../assets/logo.svg" style="color: #fafafa; width: 80px; height: 80px;"/>
+    <img src="../assets/logo.svg" style="color: #fafafa; width: 108px; height: 80px; margin-right:10px;"/>
     <h5 class="my-0 mr-md-auto fw-bold">TAMO</h5>
 
     <nav class="nav justify-content-end nav-pills" style="width: 80vw;">

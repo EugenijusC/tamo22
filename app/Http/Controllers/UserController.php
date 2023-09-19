@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 
 use App\Klausimai;
 use App\User;
+use App\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Config;
-use App\Contact;
 
+use Illuminate\Support\Facades\Route;
 
 use App\Exports\UsersExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -20,9 +21,19 @@ use Carbon\Carbon;
 class UserController extends Controller
 {
 
-    public function export() 
+    public function export(Request $request) 
 {
-    return Excel::download(new UsersExport, 'usee.xlsx');
+   //dd($request->nuo, $request->iki, $request->centras);
+    return Excel::download(new UsersExport($request->nuo, $request->iki, $request->centras, $request->kontr, $request->kontr_vardas), 'users_'.date('Ymd_His').'.xlsx');
+/*
+   // Route::get('/users/export/', function (Request $request) {
+     //   $filters = $request->only(['name', 'email']); // Filtravimo kriterijai
+    
+       // return (new UsersExport($filters))->with([
+       //     'title' => 'Vartotojų sąrašas',
+         //   'date' => now()->format('Y-m-d'),
+       // ])->download('users.xlsx');
+    */
 }
 
   //      public function export(Request $request) 

@@ -26,19 +26,19 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Naujas klausimas </h3>
+                            <h3 class="card-title">Naujas testo klausimas</h3>
                         </div>
                         <!-- /.card-header -->
 
-                        <form role="form" method="post" action="{{ route('kontaktai.store') }}">
+                        <form role="form" method="post" action="{{ route('klausimai.store') }}">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="email">Kontaktas</label>
-                                    <input type="text" name="email"
+                                    <label for="klausimas">Klausimas</label>
+                                    <!-- <input type="text" name="email"
                                            class="form-control @error('email') is-invalid @enderror" id="email"
-                                           placeholder="el.paštas">
-                                </div>
+                                           placeholder="el.paštas"> -->
+                                <!-- </div>
                                 <div class="form-group">
                                     <label for="subject">Tema</label>
                                     <input type="text" name="subject"
@@ -46,8 +46,24 @@
                                            placeholder="Tema">
                                 </div>
                                 <div class="form-group">
-                                    <label>Žinutė</label>
-                                    <textarea class="form-control" rows="3" placeholder="Tekstas..." name="message" id="message"></textarea>
+                                    <label>Žinute</label> -->
+                                    <textarea class="form-control" rows="3" placeholder="Tekstas..." name="klausimas" id="klausimas"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="atsakymas1">Atsakymas1</label>
+                                    <textarea class="form-control" rows="3" placeholder="Tekstas..." name="atsakymas1" id="atsakymas1"></textarea> 
+                                </div>
+                                <div class="form-group">
+                                    <label for="atsakymas2">Atsakymas2</label>
+                                    <textarea class="form-control" rows="3" placeholder="Tekstas..." name="atsakymas2" id="atsakymas2"></textarea> 
+                                </div>
+                                <div class="form-group">
+                                    <label for="atsakymas3">Atsakymas3</label>
+                                    <textarea class="form-control" rows="3" placeholder="Tekstas..." name="atsakymas3" id="atsakymas3"></textarea> 
+                                </div>
+                                <div class="form-group">
+                                    <label for="atsakymas4">Atsakymas4</label>
+                                    <textarea class="form-control" rows="3" placeholder="Tekstas..." name="atsakymas4" id="atsakymas4"></textarea> 
                                 </div>
                             </div>
                             <!-- /.card-body -->

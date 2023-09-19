@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Naujas klausimas</h1>
+                    <h1>Klausimo taisymas</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -26,29 +26,30 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Naujas klausimas </h3>
+                            <h3 class="card-title"> </h3>
                         </div>
                         <!-- /.card-header -->
 
-                        <form role="form" method="post" action="{{ route('kontaktai.store') }}">
+                        <form role="form" method="post" action="{{ route('klausimai.update', $klaus->id )}}">
                             @csrf
+                            @method('PUT')
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="email">Kontaktas</label>
-                                    <input type="text" name="email"
-                                           class="form-control @error('email') is-invalid @enderror" id="email"
-                                           placeholder="el.paštas">
+                                    <label for="klausimas">Klausimas</label>
+                                    <textarea class="form-control" rows="3" placeholder="Tekstas..." name="klausimas" id="klausimas" >
+                                        {{ $klaus->klaus_pavadinimas }}
+                                    </textarea>
                                 </div>
+
+                                @for ($j =1; $j <= 4;$j++)
                                 <div class="form-group">
-                                    <label for="subject">Tema</label>
-                                    <input type="text" name="subject"
-                                           class="form-control @error('subject') is-invalid @enderror" id="subject"
-                                           placeholder="Tema">
+                                    <label for="Atsakymas{{ $j}}">Atsakymas{{$j }}</label>
+                                    <textarea class="form-control" rows="3" placeholder="Tekstas..." name="atsakymas1" id="atsakymas1">
+                                    {{ $klaus->{'klaus_ats'.$j} }} 
+                                    </textarea> 
                                 </div>
-                                <div class="form-group">
-                                    <label>Žinutė</label>
-                                    <textarea class="form-control" rows="3" placeholder="Tekstas..." name="message" id="message"></textarea>
-                                </div>
+                                @endfor
+                                
                             </div>
                             <!-- /.card-body -->
 

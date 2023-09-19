@@ -22,37 +22,33 @@
     <div class="card-body">
         <!-- <a href="{{ route('kontaktai.create') }}" class="btn btn-primary mb-3">Pridėti klausimą</a> -->
        
-        <a href="{{ route('klausimai.create') }}" class="btn btn-primary mb-3 buttonas" data-count="{{ $klaus->total() }}">Pridėti testo klausimą</a>
+        
 
     @if (count($klaus))
 
             <div class="card-header">
-            <div class="card-tools">
-                <form class="form-inline" method="get" action="{{ route('search_kl') }}">
-                
-                <select class="form-control" name="grupe" style="width: 300px;text-align-last: center;">
-                          <option value="-visos-"> --Pasirinkite grupę--</option>
-                          @foreach($grupe as $gr)
-                            <option value="{{ $gr->grupe }}"> {{ $gr->gr_pavadinimas }}</option>
-                          @endforeach  
+            <div class="row mb-2">
+        <div class="col-sm-6">  
+            <a class="btn btn-warning" href="/admin/klausimai">Atgal</a>
+            <a class="btn btn-info" href="{{ route('export_klaus',['grupe'=>$c]) }}" class="btn btn-xs btn-info pull-right d-noneą">Excel</a>
+        </div>
 
-                </select>
+        <div class="col-sm-6">  
+            <h2 class="text-gray text-sm-start " style="text-align: right" >
+                Filtras: 
+                @if($s)
+                    tekstas:  {{ $s }}
+                @endif
 
-                    <div class="input-group input-group-sm" style="width: 150px;">
-                 
-                    <input type="text" name="kl_search" id="kl_search" class="form-control float-right  @error('kl_search') is-invalid @enderror"  placeholder="Ieškoti"
-                    style="height: calc(2.25rem + 2px);">
+                @if($c != '')
+                    , grupė: {{ $c }}
+                @endif
 
-                    <div class="input-group-append">
-                      <button type="submit" class="btn btn-default">
-                        <i class="fas fa-search"></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                </form>
-              </div>
-             
+            </h2>
+
+        </div>
+    </div>
+            </div>
 
              
 
@@ -161,14 +157,5 @@
 
     
 </div>
-<script>
-    const ss = document.querySelector("#kl_search");
-    
-    ss.addEventListener('keyup', () => {
-        console.log(ss.value);
-      //  window.location.href = " {{ route('search')}}?usr_search=jonas";
-    })
-    
-</script>
 
 @endsection

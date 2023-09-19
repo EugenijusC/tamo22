@@ -52,7 +52,7 @@ class Rezultatai extends Model
             default:
                break;
         };
-     //   dd($centras);
+      //  dd($centras);
 
        
 
@@ -65,7 +65,7 @@ class Rezultatai extends Model
         //         $query->where('centras', $centras);
         //        });
 
-        
+        //dd($query);
 
         return $query->paginate($puslapiavimas);
     }

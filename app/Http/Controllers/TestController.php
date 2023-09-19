@@ -26,17 +26,30 @@ class TestController extends Controller
     }
 
     public function testas(Request $request) {
+       // dd($request->testoTipasG);
         $testTipas=$request->testoTipas;
         $testoT =($testTipas == 'S' ? 'S':'N');
         $testoT1 =($testTipas == 'S' ? 'gr_sk_standart':'gr_sk_naujienos');
 
-        $kl_sk_gr=DB::table('grupes')->select($testoT1.' as sk','grupe','gr_pavadinimas')->get();
-        //dd($kl_sk_gr);    
+        $testoGr=$request->testoTipasG;
+
+        if($testoGr<>'A') {
+            // Pasirinkta tik viena grupė
+            $kl_sk_gr=DB::table('grupes')->select($testoT1.' as sk','grupe','gr_pavadinimas')
+                                        ->where('grupe',$testoGr)
+                                        ->get();
+        }
+        else {
+            //  Pasirinkti visi klausimai
+            $kl_sk_gr=DB::table('grupes')->select($testoT1.' as sk','grupe','gr_pavadinimas')
+            ->get();
+        }
+      //dd($kl_sk_gr);    
         $klausimai=array();
 
         foreach ($kl_sk_gr as $title) {
   
-            $klausimai1 = DB::table('klausimais')->select('klaus_id')
+            $klausimai1 = DB::table('klausimais')->select('id')
             ->where('klaus_testas',$testoT)
             ->where('klaus_gr_id',$title->grupe)
             ->inRandomOrder()->limit($title->sk)
@@ -68,12 +81,12 @@ class TestController extends Controller
         date_default_timezone_set('Europe/Vilnius');
         $user = Auth::id();
         $id = DB::table('rezultatais')->insertGetId(  [ 'users_id' => $user, 'rez_atsak' => $maisymas, 'testas_laikas' =>$laikas, 
-                    'testas_tipas' =>$testTipas, 
+                    'testas_tipas' => ($testTipas == 'S' ? 'S_':'A_').($testoGr == 'A' ? 'V_gr':$testoGr.'_gr'), 
                     'testas_pradzia' =>date('Y/m/d H:i:s', time())]);
 
         foreach ($klausimai as $kl) {
               //$ats=strval($kl->klaus_teisingas1).strval($kl->klaus_teisingas2).strval($kl->klaus_teisingas3).strval($kl->klaus_teisingas4);
-              DB::insert('insert into testas (test_testas_id, test_klaus_id) values(?,?)',[$id, $kl->klaus_id]);
+              DB::insert('insert into testas (test_testas_id, test_klaus_id) values(?,?)',[$id, $kl->id]);
       }
 
         $klausimai_end = DB::table('test_kl_view')

@@ -32,6 +32,16 @@
         font-size: 0.8rem;
         opacity: 0.8;
 }
+    .klaus[title]:hover::after {
+    content: attr(title);
+    font-size: 18px;
+  }
+  .klaus{
+    white-space: nowrap; 
+    width:200px;  
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+  }
     </style>
 </head>
 <body class="hold-transition sidebar-mini">

@@ -20,7 +20,10 @@ use Barryvdh\Debugbar\Twig\Extension\Debug;
 
 Route::view('/', 'welcome')->name('home');
 
-Route::get('/users/export/', 'UserController@export')->name('export');
+Route::get('/users/export/', 'UserController@export')->name('export_usr');
+Route::get('/Klausimai/export/', 'Admin\KlausimaiController@export')->name('export_klaus');
+
+
 Route::get('/users/login_tuv/', 'UserController@loginT')->name('loginT');
 Route::get('/mail/user/', 'UserController@mailUser')->name('mailU');
 
@@ -30,12 +33,16 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'admi
     Route::get('/', 'MainController@index')->name('admin.index');
     Route::resource('/klausimai','KlausimaiController');
     Route::resource('/kontaktai','ContactController');
+    Route::get('/testai/search', 'TestaiController@show')->name('search_test');
     Route::resource('/testai','TestaiController');
     Route::resource('/useriai','UseriaiController');
     Route::get('/user/search', 'SearchController@index')->name('search');
+    Route::get('/Klausimai/search', 'Search_kl_Controller@index')->name('search_kl');
+    
     //Route::get('/testai/{id}', 'TestController@edit')->name('testas_smulkiai');
     Route::get('/rezults/{id}/{name?}', 'TestaiController@testas_sm')->name('testas_smulkiai');
 
+    //Route::get('/klaus/{id}', 'KlausimaiController@klaus_sm')->name('klaus_smulkiai');
     
 
     // Route::resource('/klausimai', 'CategoryController');

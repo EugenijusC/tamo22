@@ -109,7 +109,7 @@
         </div>
     @endif
     <div class="container text-center">
-    <form method="get" action="{{ route('rezults') }}">
+    <form method="get" action="{{ route('rezults') }}"  >
         @csrf
         <div class="row row-cols-4">
         <div class="col-md-3">
@@ -120,12 +120,15 @@
         </div>
         
 
-        @if (count($usrs_centras))
+        @if (count($usrs_centras)) 
+        @php
+          $kv='Jonas';
+        @endphp
         <div class="col-md-3">
             <select name="kontr" class="form-control" style="text-align-last: center;">
             <option value="0">--Visi kontrolieriai--</option>
                 @foreach($usrs_centras as $js) 
-                    <option value="{{ $js->id }}" @if ( $kontr == $js->id  ) selected="selected" @endif>
+                    <option value="{{ $js->id }}" @if ( $kontr == $js->id  ) selected="selected" @php $kv=$js->name; @endphp;  @endif>
                         {{ $js->name }} </option> 
                 @endforeach
             </select>
@@ -134,7 +137,7 @@
 
         <div class="col-md-3">
             <select class="form-control" name="centras" style="text-align-last: center;">
-                          <option value="99" @if ( $centras === '99') selected="selected" @endif>--Visi centrai--</option>
+                          <option value="99" @if ( $centras === '99') selected="selected" @endif>--Visi centrai---</option>
                           <option value="00" @if ( $centras === '00') selected="selected" @endif>Tuvlita</option>
                           <option value="01" @if ( $centras == '01') selected="selected" @endif>Skirlita</option>
                           <option value="02" @if ( $centras == '02') selected="selected" @endif>Kauno TAC</option>
@@ -150,7 +153,7 @@
         </div>
         <br>
         <button type="submit" class="btn btn-success searchButton">Ieškoti</button>
-        <a href="{{ url('/users/export') }}" class="btn btn-xs btn-info pull-right d-none">Excel</a>
+        <a href="{{ route('export_usr',['nuo'=>$nuo, 'iki'=>$iki, 'centras'=>$centras, 'kontr'=>$kontr, 'kontr_vardas'=>$kv]) }}" class="btn btn-xs btn-info pull-right d-nonae">Excel</a>
 
     </form>
  <br>
@@ -160,63 +163,9 @@
     </div>
 <!-- <span class="badge bg-danger">ffffaaw er er <i class="fa fa-thumbs-up"></i></span> -->
 </div>
-@if (count($rez))  
-<div class="containerLent">
-    <div class="container pirmas px-0">
-        <div class="row row-cols-4 fs-4 border-bottom">
-            <div class="col text-center ">Vardas</div>
-            <div class="col text-center ">Data</div>
-            <div class="col text-center">Pažangumas</div>
-            <div class="col text-center">Teisingi </div>
-            <div class="col text-center">Klaidingi</div>
-            <div class="col text-center">Centras</div>
-            <div class="col text-center">Tipas</div>
-            <div class="col text-center">&nbsp</div>
-        </div>
-    </div>
 
-  
-    @foreach($rez as $el)
-      
-        <div class="container bg-white px-0 ">
-            <div class="row row-cols-6 border-bottom">
-                <div class="coltext-center ">{{ $el->users['name'] }}</div>
-                <div class="col text-center ">{{ $el->testas_pradzia }}</div>
-                @php
-                    $nesprestas='';
-                    if (is_null($el->testas_pazangumas) || !isset($el->testas_pazangumas)){
-                        $nesprestas='Nebaigtas';
-                    }
+@include('user.rez_table',$rez)
 
-
-                   if ($el->testas_pazangumas < 70 || is_null($el->testas_pazangumas) || !isset($el->testas_pazangumas) ){
-                    echo '<div class="col  text-center neislaikytas" >'. $el->testas_pazangumas.$nesprestas.' </div>';
-                   }
-                   else {
-                    echo '<div class="col  text-center islaikytas">'. $el->testas_pazangumas.'</div>';
-                   }
-                @endphp
-
-               
-                <div class="col  text-center">{{$el->testas_teisingi}} </div>
-                <div class="col  text-center">{{$el->testas_klaidingi}}</div>
-                <div class="col  text-center">{{$el->users['centras']}}</div>
-                <div class="col  text-center">{{$el->testas_tipas }}</div>
-                <div class="col  text-center"><a href=" {{ route('rezults_smulkiai',$el->id) }}" class="btn btn-primary">Smulkiau</a></div>
-            </div>
-        </div>
-
-
-    @endforeach
-
-        <div class="bg-white px-4 py-3 nav-link center">
-           {{ $rez->appends(['data_nuo' => request()->data_nuo,'data_iki' => request()->data_iki, 'kontr' => request()->kontr,'centras' => request()->centras  ])->links() }}
-        </div>
-    </div>
-@else
-            <p>Nėra rezultatų</p>
-@endif    
-     
 
 
     <script>
